@@ -9,38 +9,39 @@
         <img :src="darkMode ? darkIcon : lightIcon" :alt="darkMode ? 'Light mode' : 'Dark mode'" />
       </button>
     </div>
-    
-    <router-view />
+
+    <ErrorBoundary>
+      <router-view />
+    </ErrorBoundary>
   </main>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import Light from './assets/light.png';
-import Dark from './assets/dark.png';
-import ErrorUI from '../src/views/ErrorUI.vue'
+import { ref, onMounted } from 'vue'
+import Light from './assets/light.png'
+import Dark from './assets/dark.png'
+import ErrorBoundary from '../src/components/ErrorBoundary.vue'
 
 export default {
-  name: 'App',
+  components: ErrorBoundary,
+
   setup() {
-    const darkMode = ref(false);
-    const user = "emmanuelawe";
+    const darkMode = ref(false)
+    const user = 'emmanuelawe'
 
     const toggleDisplayMode = () => {
-      darkMode.value = !darkMode.value;
-      localStorage.setItem('displayMode', darkMode.value ? 'dark' : 'light');
-    };
+      darkMode.value = !darkMode.value
+      localStorage.setItem('displayMode', darkMode.value ? 'dark' : 'light')
+    }
 
     onMounted(() => {
-      let savedMode = localStorage.getItem('displayMode');
+      let savedMode = localStorage.getItem('displayMode')
       if (!savedMode) {
-        savedMode = 'light';
-        localStorage.setItem('displayMode', savedMode);
+        savedMode = 'light'
+        localStorage.setItem('displayMode', savedMode)
       }
-      darkMode.value = savedMode === 'dark';
-    });
-
-    
+      darkMode.value = savedMode === 'dark'
+    })
 
     return {
       darkMode,
@@ -48,10 +49,8 @@ export default {
       lightIcon: Light,
       darkIcon: Dark,
       user,
-      errorUI: ErrorUI
-    };
+    }
   }
-};
+}
 </script>
-
 <style scoped></style>

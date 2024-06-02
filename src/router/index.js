@@ -25,9 +25,9 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'notfound',
       component: NotFound
-    },
+    } ,
     { path: '/error',
-    name: 'errorboundary',
+    name: 'errorui',
     component: ErrorUI
     }
     // {
